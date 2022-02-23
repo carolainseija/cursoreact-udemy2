@@ -1,8 +1,11 @@
+import React, {useState} from 'react';
 import Expenses from './components/Expenses/Expenses';
 import './components/Expenses/Expenses.css';
 import NewExpense from './components/newExpense/NewExpense';
 
 function App() {
+
+  const [newSpend, setNewSpend] = useState("");
 
   const expenses = [
     {
@@ -26,13 +29,15 @@ function App() {
   ]
 
   const addExpenseHandler = expense => {
-    console.log("expense", expense)
+    console.log("exp app", expense)
+    setNewSpend(expense)
+    console.log("ESTADO", newSpend)
   }
 
   return (
     <div>
       <h2 className="titulo-main">Presupuestos del año- finanzas.</h2>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler} />
       <p className="subtitle-main">Ingresos - Egresos</p>
       <Expenses items={expenses} />
     </div>

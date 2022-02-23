@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
 //57
-const ExpenseForm = () => {
- 
+const ExpenseForm = (props) => {
 
-    //MULTIPLES ESTADOS
-    //reducir codigo
     const [stateGlobal, setStateGlobal] = useState({
         enteredTitle: "",
         enteredAmount: "",
         enteredDate: ""
     })
-
 
     const titleChangeHandler = (event) => {
         setStateGlobal({
@@ -34,24 +30,29 @@ const ExpenseForm = () => {
         })
     }
 
+    //guarda los valores de los inputs en un estado global
     const submitHandler = (event) => {
         event.preventDefault();
-        
         const expenseData = {
           title: stateGlobal.enteredTitle,
           amount: stateGlobal.enteredAmount,
           date: new Date(stateGlobal.enteredDate)
         };
+        //onSaveExpenseData lo traje por props desde  NewExpense.js
+        //le paso expense data que es lo que usa la funcion para agregarle la id a lo que ya estaba
+        props.onSaveExpenseData(expenseData);
 
-        console.log(expenseData);
+
+        setStateGlobal("")
       };
+    
 
     return (
         <form onSubmit={submitHandler}>
             <div className='new-expense__controls'>
                 <div className='new-expense__control'>
                     <label>Titulo</label>
-                    <input type="text" value={stateGlobal.enteredTitle} onChange={titleChangeHandler} />
+                    <input type="text" name='title' value={stateGlobal.enteredTitle} onChange={titleChangeHandler} />
                 </div>
                 <div className='new-expense__control'>
                     <label>Monto</label>
