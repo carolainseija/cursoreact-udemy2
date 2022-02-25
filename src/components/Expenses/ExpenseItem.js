@@ -8,7 +8,7 @@ const ExpenseItem = (props) => {
     
     const clickHandler = () => {
     setTile("actualizar")
-        console.log("hola, titl", title)
+        console.log("hola, date", props.date)
     };
 
     const [title, setTile] = useState(props.title);
